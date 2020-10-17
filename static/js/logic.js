@@ -70,7 +70,7 @@ var myMap = L.map("map", {
       : "rgb(0, 255, 234)";
 }
   var legend = L.control({position: 'bottomright'});
-  legend.onAdd = function (map) {
+  legend.onAdd = function (myMap) {
   var div = L.DomUtil.create('div', 'info legend');
   labels = ['<strong>Depth</strong>'],
   categories = ['0','10','30','50','70','90'];
@@ -80,7 +80,7 @@ var myMap = L.map("map", {
               + categories[i] + (categories[i + 1] ? "&ndash;" + categories[i + 1] + "<br>" : "+"));
       }
       div.innerHTML = labels.join('<br>');
-  return div;
+  return div; //div class added in index.html file
   };
 legend.addTo(myMap);
  
