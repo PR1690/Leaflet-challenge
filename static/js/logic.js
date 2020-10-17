@@ -6,7 +6,7 @@ var earth_url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_d
 // Creating map object
 var myMap = L.map("map", {
     center: [37.09, -95.71],
-    zoom: 3
+    zoom: 2.5
   });
   
 // Adding tile layer
@@ -24,18 +24,18 @@ var myMap = L.map("map", {
     var magn = features.properties.mag;             //create variable to get magnitude data from json file
     var magd = features.geometry.coordinates[2];    //create variable to get depth of the earth (third coordinate)from json file
     var magcolor = "red"
-    if (magd > 80){
+    if (magd > 90){
         magcolor = 'rgb(255, 0, 0)'
-    }else if (magd <= 80 && magd  >= 70){
-        magcolor = 'rgb(255, 102, 0)'
+    }else if (magd <= 90 && magd  >= 70){
+        magcolor = 'rgb(255, 132, 0)'
     }else if (magd <= 69 && magd  >= 50){
-        magcolor = 'rgb(255, 153, 51)'
+        magcolor = 'rgb(255, 187, 51)'
     }else if (magd <= 49 && magd  >= 30){
-        magcolor = 'rgb(255, 204, 0)'
+        magcolor = 'rgb(255, 238, 0)'
     }else if (magd <= 29 && magd  >= 10){
-        magcolor = 'rgb(204, 255, 102)'
+        magcolor = 'rgb(111, 255, 0)'
     }else {
-        magcolor = 'rgb(64, 255, 0)'
+        magcolor = 'rgb(0, 255, 234)'
     }
     let circle = {
         radius: magn * 5,
@@ -57,23 +57,23 @@ var myMap = L.map("map", {
   // create a scale for legends to provide context to earthquake magnitude
 
   function legendclr(d) {
-    return d > 80
+    return d >= 90
       ? "rgb(255, 0, 0)"
       : d > 70
-      ? "rgb(255, 102, 0)"
+      ? "rgb(255, 132, 0)"
       : d > 50
-      ? "rgb(255,153,51)"
+      ? "rgb(255, 187, 51)"
       : d > 30
-      ? "rgb(255,204,0)"
+      ? "rgb(255, 238, 0)"
       : d > 10
-      ? "rgb(204,255,102)"
-      : "rgb(64, 255, 0)";
+      ? "rgb(111, 255, 0)"
+      : "rgb(0, 255, 234)";
 }
   var legend = L.control({position: 'bottomright'});
   legend.onAdd = function (map) {
   var div = L.DomUtil.create('div', 'info legend');
   labels = ['<strong>Depth</strong>'],
-  categories = ['0','10','30','50','70','80'];
+  categories = ['0','10','30','50','70','90'];
   for (var i = 0; i < categories.length; i++) {
           div.innerHTML +=
           labels.push('<i class="circle" style="background:' + legendclr(categories[i]) + '"></i> ' +
